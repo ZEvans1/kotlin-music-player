@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
                                     imageResource = R.drawable.ic_shuffle_black_24dp
                                     onClick {
 //                                        playRandom()
-                                        print("no shuffle")
+                                        Log.v("Button press", "no shuffle")
                                     }
                                 }.lparams(0, wrapContent, 0.5f)
                             }.lparams(matchParent, wrapContent) {
