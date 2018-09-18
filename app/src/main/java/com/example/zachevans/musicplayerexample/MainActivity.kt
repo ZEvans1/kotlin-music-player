@@ -56,6 +56,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun createPlayer(){
 
+//        MusicFinder musicFinder = new MusicFinder(getContentResolver());
+//        musicFinder.prepare();
+//
+//        List<MusicFinder.Song> songs = musicFinder.getAllSongs();
+//        System.out.println(songs.size());
+//        for(MusicFinder. com.mtechviral.mplaylib.MusicFinder.Song song:songs) {
+//            System.out.println(song.getTitle());
+//            System.out.println(song.getArtist());
+//        }
+
+
         var songsJob = async {
             val songFinder = MusicFinder(contentResolver)
             songFinder.prepare()
