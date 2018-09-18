@@ -56,16 +56,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun createPlayer(){
 
-//        MusicFinder musicFinder = new MusicFinder(getContentResolver());
-//        musicFinder.prepare();
-//
-//        List<MusicFinder.Song> songs = musicFinder.getAllSongs();
-//        System.out.println(songs.size());
-//        for(MusicFinder. com.mtechviral.mplaylib.MusicFinder.Song song:songs) {
-//            System.out.println(song.getTitle());
-//            System.out.println(song.getArtist());
-//        }
-
 
         var songsJob = async {
             val songFinder = MusicFinder(contentResolver)
@@ -108,7 +98,8 @@ class MainActivity : AppCompatActivity() {
                                 shuffleButton = imageButton {
                                     imageResource = R.drawable.ic_shuffle_black_24dp
                                     onClick {
-                                        playRandom()
+//                                        playRandom()
+                                        print("no shuffle")
                                     }
                                 }.lparams(0, wrapContent, 0.5f)
                             }.lparams(matchParent, wrapContent) {
@@ -121,20 +112,20 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                fun playRandom() {
-                    Collections.shuffle(songs)
-                    val song = songs[0]
-                    mediaPlayer?.reset()
-                    mediaPlayer = MediaPlayer.create(ctx,song.uri)
-                    mediaPlayer?.setOnCompletionListener {
-                        playRandom()
-                    }
-                    albumArt?.imageURI = song.albumArt
-                    songTitle?.text = song.title
-                    songArtist?.text = song.artist
-                    mediaPlayer?.start()
-                    playButton?.imageResource = R.drawable.ic_pause_black_24dp
-                }
+//                fun playRandom() {
+//                    Collections.shuffle(songs)
+//                    val song = songs[0]
+//                    mediaPlayer?.reset()
+//                    mediaPlayer = MediaPlayer.create(ctx,song.uri)
+//                    mediaPlayer?.setOnCompletionListener {
+//                        playRandom()
+//                    }
+//                    albumArt?.imageURI = song.albumArt
+//                    songTitle?.text = song.title
+//                    songArtist?.text = song.artist
+//                    mediaPlayer?.start()
+//                    playButton?.imageResource = R.drawable.ic_pause_black_24dp
+//                }
 
                 fun playOrPause(){
                     var songPlaying:Boolean? = mediaPlayer?.isPlaying
@@ -150,7 +141,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             playerUI.setContentView(this@MainActivity)
-            playerUI.playRandom()
+//            playerUI.playRandom()
         }
     }
     override fun onDestroy() {
