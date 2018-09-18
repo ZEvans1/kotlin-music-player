@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.mtechviral.mplaylib.MusicFinder
 import kotlinx.coroutines.experimental.async
+
 import kotlinx.coroutines.experimental.launch
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
@@ -57,7 +58,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun createPlayer(){
 
-
         var songsJob = async {
             val songFinder = MusicFinder(contentResolver)
             songFinder.prepare()
@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         launch(kotlinx.coroutines.experimental.android.UI) {
             val songs = songsJob.await()
+            Log.v("Songs done?", songs.toString())
 
             val playerUI = object : AnkoComponent<MainActivity> {
                 override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
@@ -93,6 +94,7 @@ class MainActivity : AppCompatActivity() {
                                     imageResource = R.drawable.ic_play_arrow_black_24dp
                                     onClick {
                                         playOrPause()
+                                        Log.v("Play press", "play pressed")
                                     }
                                 }.lparams(0, wrapContent, 0.5f)
 
@@ -113,20 +115,20 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-//                fun playRandom() {
-//                    Collections.shuffle(songs)
-//                    val song = songs[0]
-//                    mediaPlayer?.reset()
-//                    mediaPlayer = MediaPlayer.create(ctx,song.uri)
-//                    mediaPlayer?.setOnCompletionListener {
-//                        playRandom()
-//                    }
-//                    albumArt?.imageURI = song.albumArt
-//                    songTitle?.text = song.title
-//                    songArtist?.text = song.artist
-//                    mediaPlayer?.start()
-//                    playButton?.imageResource = R.drawable.ic_pause_black_24dp
-//                }
+                fun playRandom() {
+                    Collections.shuffle(songs)
+                    val song = songs[0]
+                    mediaPlayer?.reset()
+                    mediaPlayer = MediaPlayer.create(ctx,song.uri)
+                    mediaPlayer?.setOnCompletionListener {
+                        playRandom()
+                    }
+                    albumArt?.imageURI = song.albumArt
+                    songTitle?.text = song.title
+                    songArtist?.text = song.artist
+                    mediaPlayer?.start()
+                    playButton?.imageResource = R.drawable.ic_pause_black_24dp
+                }
 
                 fun playOrPause(){
                     var songPlaying:Boolean? = mediaPlayer?.isPlaying
